@@ -1,5 +1,84 @@
 import random
 
+def combate():
+    global vida
+
+    print("¡Empieza el combate!")
+
+    vida_enemigo = 30
+
+    while vida_enemigo > 0 and vida > 0:
+
+        print("\n====================")
+        print("     TU TURNO")
+        print("====================") 
+        print(f"\nVida enemigo: {vida_enemigo}")
+        print(f"Tu vida: {vida}")
+        print("1. Atacar")
+        print("2. Usar objeto")
+
+        opcion = input("¿Qué haces?: ")
+
+        if opcion == "1":
+            daño = random.randint(5, 15)
+            vida_enemigo -= daño
+            print(f"Haces {daño} de daño")
+
+        elif opcion == "2":
+            if len(inventario) == 0:
+                print("No tienes objetos")
+            else:
+                print("Inventario:")
+
+                objetos = list(inventario.keys())
+
+                for i, obj in enumerate(objetos, 1):
+                    print(f"{i}. {obj} x{inventario[obj]}")
+
+                eleccion = input("Elige objeto: ")
+
+                if eleccion.isdigit():
+                    indice = int(eleccion) - 1
+
+                    if 0 <= indice < len(objetos):
+                        objeto = objetos[indice]
+
+                        if objeto == "Manta vieja":
+                            vida += 20
+                            print("+20 vida")
+
+                        elif objeto == "Mazo de sahur":
+                            vida_enemigo -= 20
+                            print("-20 enemigo")
+
+                        elif objeto == "Colmillo de elefante":
+                            vida_enemigo -= 10
+                            print("-10 enemigo")
+
+                        inventario[objeto] -= 1
+                        if inventario[objeto] == 0:
+                            del inventario[objeto]
+
+        else:
+            print("Opción no válida")
+        
+        if vida_enemigo > 0:
+            print("--- TURNO DEL ENEMIGO ---")
+            daño_enemigo = random.randint(5, 10)
+            vida -= daño_enemigo
+            print(f"El enemigo te hace {daño_enemigo} de daño")
+
+    if vida <= 0:
+        print("Has muerto...")
+    else:
+        print("¡Has ganado el combate!")
+
+        recompensa = random.randint(20, 50)
+        aura += recompensa
+
+        print(f"+{recompensa} de aura por la victoria")
+    
+
 nombre = input("¿Cuál es tu nombre?: ")
 
 vida = 100
@@ -21,7 +100,7 @@ while True:
     if opcion == "1":
         print("Sales a explorar...")
 
-        evento = random.randint(1, 6)
+        evento = random.randint(1, 7)
 
         if evento == 1:
             print("¡Encuentras un doble elefante telépata de guerra!")
@@ -59,7 +138,7 @@ while True:
                 else:
                     inventario["Mazo de sahur"] = 1
 
-                    aura += 50
+                aura +=50
 
             else:
                 print("Has perdido el duelo...")
@@ -93,6 +172,10 @@ while True:
             print("¡Escapando de un therian te metes en una cueva y encuentras una mina de aura!")
             aura += 100
             print("¡+100 de aura!")
+
+        elif evento == 6:
+            print("¡Un Skibidi toilet salvaje aparece!")
+            combate()
 
         else:
             print("No ocurre nada.")
