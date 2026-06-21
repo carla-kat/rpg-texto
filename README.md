@@ -1,7 +1,7 @@
 # RPG TEXTO 🎮
 
 ## 📌 Descripción
-RPG de texto desarrollado en Python donde el jugador explora, obtiene objetos, combate enemigos y acumula aura para alcanzar la victoria.
+RPG de texto desarrollado en Python donde el jugador explora, obtiene objetos, combate enemigos y acumula aura para alcanzar la victoria
 
 ## ⚙️ Tecnologías
 - Python 3
