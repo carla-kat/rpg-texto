@@ -2,6 +2,7 @@ import random
 
 def combate():
     global vida
+    global aura
 
     print("¡Empieza el combate!")
 
